@@ -39,6 +39,17 @@ beersRouter
     })
 
 
+beersRouter
+    .route('/random/beer')
+    .get((req, res, next) => {
+        BeerService.getRandomBeer(req.app.get('db'))
+            .then(random => {
+                res.json(random)
+            })
+            .catch(next)
+    })
+
+
 async function checkBeerExists(req, res, next) {
     try {
         const beer = await BeerService.getById(

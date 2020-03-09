@@ -1,6 +1,3 @@
-const knex = require('knex')
-const { attachPaginate } = require('knex-paginate')
-attachPaginate()
 const xss = require('xss')
 
 
@@ -19,6 +16,10 @@ const BeersService = {
         return BeersService.getAllBeers(db)
         .where('beers.name', name)
         .first()
+    },
+    getRandomBeer(db) {
+        return db
+            .raw(`SELECT * FROM beers ORDER BY RANDOM() limit 1;`)
     },
 }
 
