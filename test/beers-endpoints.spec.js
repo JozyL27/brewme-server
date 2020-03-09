@@ -15,4 +15,14 @@ describe(`beers endpoint`, function() {
     after('disconnect from db', () => db.destroy())
 
     before('clean the table', () => db('beers').truncate())
+
+    describe(`GET /api/beers`, () => {
+        context(`Given no beers`, () => {
+            it(`responds with 200 and empty list`, () => {
+                return supertest(app)
+                    .get('/api/beers')
+                    .expect(200, [])
+            })
+        })
+    })
 })
