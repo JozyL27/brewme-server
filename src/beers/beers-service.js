@@ -5,7 +5,8 @@ const Treeize = require('treeize')
 
 const BeersService = {
     getAllBeers(db) {
-        return db('beers')
+        return db
+            .from('beers')
             .select('*')
     }
 }
