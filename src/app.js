@@ -19,6 +19,7 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
+// beers endpoint
 app.use('/api/beers', beersRouter)
 // login endpoint
 app.use('/api/auth', authRouter)

@@ -10,6 +10,11 @@ const UserBeersService = {
             .innerJoin('brewme_users', 'user_beers.user_id', 'brewme_users.id')
             .where('brewme_users.id', id)
     },
+    getUserById(db, id) {
+        return db('brewme_users')
+            .where('brewme_users.id', id)
+            .first()
+    },
 }
 
 
