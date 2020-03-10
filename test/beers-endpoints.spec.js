@@ -14,7 +14,7 @@ describe(`beers endpoint`, function() {
 
     after('disconnect from db', () => db.destroy())
 
-    before('clean the table', () => db('beers').truncate())
+    // before('clean the table', () => db('beers').truncate())
 
     describe(`GET /api/beers`, () => {
         context(`Given no beers`, () => {
