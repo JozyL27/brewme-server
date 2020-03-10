@@ -21,6 +21,15 @@ const BeersService = {
         return db
             .raw(`SELECT * FROM beers ORDER BY RANDOM() limit 1;`)
     },
+    getPaginatedResults(db, page) {
+        const beersPerPage = 10
+        const offset = beersPerPage * (page - 1)
+
+        return db('beers')
+            .select('*')
+            .limit(beersPerPage)
+            .offset(offset)
+    },
 }
 
 module.exports = BeersService

@@ -17,6 +17,19 @@ beersRouter
 
 
 beersRouter
+    .route('/paginate/:page_id')
+    .get((req, res, next) => {
+        BeerService.getPaginatedResults(req.app.get('db'),
+        req.params.page_id
+        )
+        .then(beers => {
+            res.json(beers)
+        })
+        .catch(next)
+    })
+
+
+beersRouter
     .route('/:beer_id')
     .all(checkBeerExists)
     .get((req, res, next) => {
