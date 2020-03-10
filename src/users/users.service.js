@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
 
 const UsersService = {
-    validatePassword(passowrd) {
+    validatePassword(password) {
         if(password.length < 8) {
             return `Password must be longer than 8 characters`
         }

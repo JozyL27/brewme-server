@@ -1,7 +1,10 @@
 const express = require('express')
+const path = require('path')
 const UserBeersService = require('./user-beers-service')
 
 const userBeersRouter = express.Router()
+const jsonBodyParser = express.json()
+
 
 // requires auth in future
 
@@ -14,6 +17,36 @@ userBeersRouter
                 res.json(beers)
             })
             .catch(next)
+    })
+
+
+//requires auth in future
+
+userBeersRouter
+    .route('/')
+    .post(jsonBodyParser, (req, res, next) => {
+        const { user_id, beer_id } = req.body
+        const newBeer = { user_id, beer_id }
+
+        for (const [key, value] of Object.entries(newBeer))
+            if (value == null)
+                return res.status(400).json({
+                    error: `Missing '${key}' in request body`
+                })
+
+        newBeer.user_id = req.user.id
+
+        UserBeersService.insertBeer(
+            req.app.get('db'),
+            newBeer
+        )
+        .then(beer => {
+            res
+                .status(201)
+                .location(path.posix.join(req.originalUrl, `/${beer.id}`))
+                .json(beer)
+        })
+        .catch(next)
     })
 
 
