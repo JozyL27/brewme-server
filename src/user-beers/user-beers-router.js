@@ -34,7 +34,7 @@ userBeersRouter
                     error: `Missing '${key}' in request body`
                 })
 
-        newBeer.user_id = req.user.id
+        // newBeer.user_id = req.user.id
 
         UserBeersService.insertBeer(
             req.app.get('db'),
