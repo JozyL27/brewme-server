@@ -1,0 +1,4 @@
+TRUNCATE
+user_beers,
+brewme_users
+RESTART IDENTITY CASCADE;

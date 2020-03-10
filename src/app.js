@@ -6,6 +6,8 @@ const helmet = require('helmet')
 const { NODE_ENV} = require('./config')
 const beersRouter = require('./beers/beers-router')
 const authRouter = require('./auth/auth-router')
+const usersRouter = require('./users/users-router')
+const userBeersRouter = require('./user-beers/user-beers-router')
 
 const app = express()
 
@@ -18,7 +20,13 @@ app.use(helmet())
 app.use(cors())
 
 app.use('/api/beers', beersRouter)
+// login endpoint
 app.use('/api/auth', authRouter)
+// signup endpoint
+app.use('/api/users', usersRouter)
+// user beers endpoint
+app.use('/api/userBeers', userBeersRouter)
+
 app.get('/', (req, res) => {
     res.send('Hello, World!')
 })
