@@ -17,7 +17,7 @@ beersRouter
 
 
 beersRouter
-    .route('/paginate/:page_id')
+    .route('/:page_id')
     .get((req, res, next) => {
         BeerService.getPaginatedResults(req.app.get('db'),
         req.params.page_id
@@ -30,7 +30,7 @@ beersRouter
 
 
 beersRouter
-    .route('/:beer_id')
+    .route('/byid/:beer_id')
     .all(checkBeerExists)
     .get((req, res, next) => {
         BeerService.getById(req.app.get('db'), req.params.beer_id)
