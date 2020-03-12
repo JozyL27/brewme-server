@@ -42,7 +42,8 @@ beersRouter
 
 
 beersRouter
-    .route('/byname/:beer_name')
+    .route('/name/:beer_name')
+    .all(checkNameExists)
     .get((req, res, next) => {
         BeerService.getByName(req.app.get('db'), req.params.beer_name)
             .then(beer => {
@@ -68,6 +69,26 @@ async function checkBeerExists(req, res, next) {
         const beer = await BeerService.getById(
             req.app.get('db'),
             req.params.beer_id
+        )
+
+        if (!beer)
+            return res.status(404).json({
+                error: `Beer doesn't exist`
+            })
+
+            res.beer = beer
+            next()
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+async function checkNameExists(req, res, next) {
+    try {
+        const beer = await BeerService.getByName(
+            req.app.get('db'),
+            req.params.beer_name
         )
 
         if (!beer)

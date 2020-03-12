@@ -12,10 +12,14 @@ const BeersService = {
             .where('beers.id', id)
             .first()
     },
+    // getByName(db, name) {
+    //     return BeersService.getAllBeers(db)
+    //     .where('beers.name', name)
+    //     .first()
+    // },
     getByName(db, name) {
         return BeersService.getAllBeers(db)
-        .where('beers.name', name)
-        .first()
+        .where('beers.name', 'like', `%${name}%`)
     },
     getRandomBeer(db) {
         return db
