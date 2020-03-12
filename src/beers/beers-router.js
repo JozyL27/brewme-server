@@ -42,7 +42,7 @@ beersRouter
 
 
 beersRouter
-    .route('/:beer_name')
+    .route('/byname/:beer_name')
     .get((req, res, next) => {
         BeerService.getByName(req.app.get('db'), req.params.beer_name)
             .then(beer => {

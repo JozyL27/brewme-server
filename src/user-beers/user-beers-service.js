@@ -15,13 +15,6 @@ const UserBeersService = {
             .where('brewme_users.id', id)
             .first()
     },
-    // getById(db, id) {
-    //     return db
-    //         .from('user_beers')
-    //         .select('*')
-    //         .where('user_beers.beer_id', id)
-    //         .first()
-    // },
     insertBeer(db, newBeer) {
         return db
             .insert(newBeer)

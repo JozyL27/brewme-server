@@ -20,6 +20,9 @@ userBeersRouter
     })
 
 
+
+// adding post feature to /:user_id, add new beer by using req.params.user_id instead of
+//manually adding id grab it from params
 //requires auth in future
 
 userBeersRouter
@@ -33,7 +36,8 @@ userBeersRouter
                 return res.status(400).json({
                     error: `Missing '${key}' in request body`
                 })
-
+        
+        // future use code below
         // newBeer.user_id = req.user.id
 
         UserBeersService.insertBeer(
