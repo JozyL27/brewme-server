@@ -82,18 +82,18 @@ async function checkUserBeerExists(req, res, next) {
     const { user_id, beer_id } = req.body
 
     try {
-        const userBeer = await UserBeersService.getUserBeer(
+        const newBeer = await UserBeersService.getUserBeer(
             req.app.get('db'),
             user_id,
             beer_id
         )
 
-        if (userBeer)
+        if (newBeer)
             return res.status(400).json({
                 error: `Beer already in "My Beer" list!`
             })
 
-            res.userBeer = userBeer
+            res.newBeer = newBeer
             next()
     } catch (error) {
         next(error)

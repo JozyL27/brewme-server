@@ -30,8 +30,10 @@ const UserBeersService = {
     },
     getUserBeer(db, userId, beerId) {
         return db('user_beers')
+            .select('*')
             .where('user_beers.user_id', userId)
             .andWhere('user_beers.beer_id', beerId)
+            .first()
     },
 }
 
