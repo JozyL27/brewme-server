@@ -2,11 +2,10 @@ const express = require('express')
 const path = require('path')
 const UserBeersService = require('./user-beers-service')
 
+
 const userBeersRouter = express.Router()
 const jsonBodyParser = express.json()
 
-
-// requires auth in future
 
 userBeersRouter
     .route('/:user_id')
@@ -20,14 +19,9 @@ userBeersRouter
     })
 
 
-
-// adding post feature to /:user_id, add new beer by using req.params.user_id instead of
-//manually adding id grab it from params
-//requires auth in future
-
 userBeersRouter
     .route('/')
-    .post(jsonBodyParser, (req, res, next) => {
+    .post(jsonBodyParser, checkUserBeerExists, (req, res, next) => {
         const { user_id, beer_id } = req.body
         const newBeer = { user_id, beer_id }
 
@@ -37,9 +31,6 @@ userBeersRouter
                     error: `Missing '${key}' in request body`
                 })
         
-        // future use code below
-        // newBeer.user_id = req.user.id
-
         UserBeersService.insertBeer(
             req.app.get('db'),
             newBeer
@@ -58,7 +49,7 @@ userBeersRouter
         UserBeersService.deleteBeer(
             req.app.get('db'),
             user_id,
-            beer_id,
+            beer_id
         )
         .then(numRowsAffected => {
             res.status(204).end()
@@ -85,6 +76,32 @@ async function checkUserExists(req, res, next) {
         next(error)
     }
 }
+
+
+async function checkUserBeerExists(req, res, next) {
+    const { user_id, beer_id } = req.body
+
+    try {
+        const userBeer = await UserBeersService.getUserBeer(
+            req.app.get('db'),
+            user_id,
+            beer_id
+        )
+
+        if (userBeer)
+            return res.status(400).json({
+                error: `Beer already in "My Beer" list!`
+            })
+
+            res.userBeer = userBeer
+            next()
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+
 
 
 
