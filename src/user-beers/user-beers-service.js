@@ -22,6 +22,12 @@ const UserBeersService = {
             .returning('*')
             .then(([beer]) => beer)
     },
+    deleteBeer(db, userId, beerId) {
+        return db('user_beers')
+            .where('user_beers.user_id', userId)
+            .andWhere('user_beers.beer_id', beerId)
+            .delete()
+    },
 }
 
 

@@ -52,6 +52,19 @@ userBeersRouter
         })
         .catch(next)
     })
+    .delete(jsonBodyParser, (req, res, next) => {
+        const { user_id, beer_id } = req.body
+
+        UserBeersService.deleteBeer(
+            req.app.get('db'),
+            user_id,
+            beer_id,
+        )
+        .then(numRowsAffected => {
+            res.status(204).end()
+        })
+        .catch(next)
+    })
 
 
 async function checkUserExists(req, res, next) {
