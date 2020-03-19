@@ -40,5 +40,33 @@ describe(`beers endpoint`, function() {
                     .expect(200, helpers.makeBeersArray())
             })
         })
+
+        describe(`GET /name/:by_name`, () => {
+            context(`given no beers by name`, () => {
+                const invalidBeer = 'invalidBrewski'
+
+                it(`returns 404 not found and a message`, () => {
+                    return supertest(app)
+                        .get(`/api/beers/name/${invalidBeer}`)
+                        .expect(404, {"error":"No brewskis found, try another search!"})
+                })
+            })
+
+            context(`Given there is a beer by a given name`, () => {
+                beforeEach('insert beers', () => {
+                    return db('beers')
+                    .insert(helpers.makeBeersArray())
+                })
+
+                it(`responds with 200 and the beer`, () => {
+                    const beers = helpers.makeBeersArray()
+                    const beerOne = beers[0]
+
+                    return supertest(app)
+                        .get(`/api/beers/name/${beerOne.name}`)
+                        .expect(200, [beers[0]])
+                })
+            })
+        })
     })
 })

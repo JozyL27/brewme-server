@@ -13,8 +13,7 @@ function makeBeersArray() {
             descript: 'solid beer',
             add_user: 0,
             id: 1,
-            last_mod: new Date('2029-01-22T16:28:32.615Z').toISOString()
-            
+            last_mod: new Date('2029-01-22T16:28:32.615Z').toISOString()            
         },
         {
             brewery_id: 1234567,
@@ -50,6 +49,7 @@ function makeBeersArray() {
         },
     ]
 }
+
 
 function cleanTables(db) {
     return db.transaction(trx =>
