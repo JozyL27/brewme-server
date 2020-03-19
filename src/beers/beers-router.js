@@ -91,9 +91,9 @@ async function checkNameExists(req, res, next) {
             req.params.beer_name
         )
 
-        if (!beer)
+        if (beer.length === 0)
             return res.status(404).json({
-                error: `Beer doesn't exist`
+                error: `No brewskis found, try another search!`
             })
 
             res.beer = beer
