@@ -58,10 +58,37 @@ beersRouter
     .get((req, res, next) => {
         BeerService.getRandomBeer(req.app.get('db'))
             .then(random => {
+
+                if (random.rows.length === 0) {
+                return res.status(404).json({
+                    error: `No brewskis found in database!`
+                })
+                } else {
+
+                    res.random = random
+                    next()
+                }
+
                 res.json(random)
             })
             .catch(next)
     })
+
+    // .get((req, res, next) => {
+    //     BeerService.getRandomBeer(req.app.get('db'))
+    //         .then(random => {
+    //             res.json(random)
+    //         })
+    //         .catch(next)
+    // })
+
+    // if (beer.rows.length === 0)
+    // return res.status(404).json({
+    //     error: `No brewskis found, try another search!`
+    // })
+
+    // res.beer = beer
+    // next()
 
 
 async function checkBeerExists(req, res, next) {

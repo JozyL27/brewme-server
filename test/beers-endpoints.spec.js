@@ -68,5 +68,39 @@ describe(`beers endpoint`, function() {
                 })
             })
         })
+
+        describe(`GET /random/beer`, () => {
+            context(`given beers are in the database`, () => {
+                beforeEach('insert beers', () => {
+                    const beers = helpers.makeBeersArray()
+                    const randBeer = beers[0]
+
+                    return db('beers')
+                    .insert(randBeer)
+                })
+
+                it(`responds with 200 and a random beer`, () => {
+                    const beers = helpers.makeBeersArray()
+                    const randBeer = beers[0]
+
+                    return supertest(app)
+                        .get(`/api/beers/random/beer`)
+                        .expect(200)
+                        .expect(res => {
+                            const resbeer = res.body.rows[0]
+                            expect(resbeer.name).to.eql(randBeer.name)
+                            expect(resbeer.id).to.eql(randBeer.id)
+                        })
+                })
+            })
+
+            context(`given no beers in database`, () => {
+                it(`responds with status 404 and a message`, () => {
+                    return supertest(app)
+                        .get(`/api/beers/random/beer`)
+                        .expect(404, {"error":"No brewskis found in database!"})
+                })
+            })
+        })
     })
 })

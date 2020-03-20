@@ -50,6 +50,14 @@ function makeBeersArray() {
     ]
 }
 
+function makeUser() {
+    return {
+        id: 1,
+        user_name: 'Zelda',
+        password: '#Link1234'
+    }
+}
+
 
 function cleanTables(db) {
     return db.transaction(trx =>
@@ -73,5 +81,6 @@ function cleanTables(db) {
 
 module.exports = {
     makeBeersArray,
-    cleanTables
+    cleanTables,
+    makeUser
 }

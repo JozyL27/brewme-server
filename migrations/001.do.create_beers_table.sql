@@ -11,5 +11,5 @@ CREATE TABLE beers (
   filepath text,
   descript text,
   add_user integer NOT NULL default '0',
-  last_mod TIMESTAMP DEFAULT now() NOT NULL
+  last_mod TIMESTAMPTZ DEFAULT now() NOT NULL
 );
