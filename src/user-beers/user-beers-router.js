@@ -13,7 +13,7 @@ userBeersRouter
     .get((req, res, next) => {
         UserBeersService.getUserBeers(req.app.get('db'), req.params.user_id)
             .then(beers => {
-                res.json(beers)
+                res.status(200).json(beers)
             })
             .catch(next)
     })

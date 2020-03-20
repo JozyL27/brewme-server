@@ -58,6 +58,13 @@ function makeUser() {
     }
 }
 
+function makeUserBeers() {
+    return {
+        user_id: 1,
+        beer_id: 1
+    }
+}
+
 
 function cleanTables(db) {
     return db.transaction(trx =>
@@ -82,5 +89,6 @@ function cleanTables(db) {
 module.exports = {
     makeBeersArray,
     cleanTables,
-    makeUser
+    makeUser,
+    makeUserBeers
 }
