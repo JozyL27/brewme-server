@@ -21,6 +21,7 @@ describe(`User-Beers endpoint`, () => {
     afterEach('cleanup', () => helpers.cleanTables(db))
 
     describe(`/api/userbeers`, () => {
+
         context(`Given there is data in the userbeers table`, () => {
             beforeEach('insert beers', () => {
                 return db('beers')
@@ -53,6 +54,34 @@ describe(`User-Beers endpoint`, () => {
                     expect(userBeer.name).to.eql(userOneBeer.name)
                     expect(userBeer.beer_id).to.eql(userOneBeer.id)
                 })
+            })
+
+            it(`POST returns status 201 and the created beer`, () => {
+                const newUserBeer = {
+                    user_id: 1,
+                    beer_id: 2
+                }
+
+                return supertest(app)
+                    .post(`/api/userbeers`)
+                    .send(newUserBeer)
+                    .expect(201)
+                    .expect(res => {
+                        expect(res.body.user_id).to.eql(newUserBeer.user_id)
+                        expect(res.body.beer_id).to.eql(newUserBeer.beer_id)
+                    })
+            })
+
+            it(`Given no username or password when posting, returns a status of 400`, () => {
+                const invalidUserBeer = {
+                    user_id: 1,
+                    beer_id: null
+                }
+
+                return supertest(app)
+                    .post(`/api/userbeers`)
+                    .send(invalidUserBeer)
+                    .expect(400, {"error": `Missing 'beer_id' in request body` })
             })
         })
     })
