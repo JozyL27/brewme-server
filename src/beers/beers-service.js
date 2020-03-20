@@ -7,11 +7,6 @@ const BeersService = {
             .from('beers')
             .select('*')
     },
-    getById(db, id) {
-        return BeersService.getAllBeers(db)
-            .where('beers.id', id)
-            .first()
-    },
     getByName(db, name) {
         return BeersService.getAllBeers(db)
         .where('beers.name', 'like', `%${name}%`)

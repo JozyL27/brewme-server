@@ -33,7 +33,7 @@ describe(`User-Beers endpoint`, () => {
                     .insert(helpers.makeUser())
             })
 
-            beforeEach('insert users', () => {
+            beforeEach('insert user beers', () => {
                 return db('user_beers')
                     .insert(helpers.makeUserBeers())
             })
