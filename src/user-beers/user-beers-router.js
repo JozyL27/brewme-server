@@ -18,7 +18,6 @@ userBeersRouter
             .catch(next)
     })
 
-
 userBeersRouter
     .route('/')
     .post(jsonBodyParser, checkUserBeerExists, (req, res, next) => {
@@ -76,7 +75,6 @@ async function checkUserExists(req, res, next) {
         next(error)
     }
 }
-
 
 async function checkUserBeerExists(req, res, next) {
     const { user_id, beer_id } = req.body

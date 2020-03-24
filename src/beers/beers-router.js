@@ -15,7 +15,6 @@ beersRouter
             .catch(next)
     })
 
-
 beersRouter
     .route('/:page_id')
     .get((req, res, next) => {
