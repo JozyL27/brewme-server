@@ -13,7 +13,7 @@
 
 ## Endpoints
 - /api/beers
-    - /api/beers/:beer_name endpoint retrieves a beer or list of beers that contain the word or keyword searched as an array. example keyword: "bud" retrieves "bud light", "budweiser", "bud light lime", etc.
+    - /api/beers/:beer_name endpoint retrieves a beer or list of beers that contain the word or keyword searched as an array. example keyword: "bud" retrieves "bud light", "budweiser", "bud light lime", etc. This endpoint is case insensetive.
     - /api/beers/random endpoint retrieves one random beer from the database as an object.
 
 - /api/userBeers
