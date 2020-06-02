@@ -54,7 +54,6 @@ beersRouter
                     res.random = random
                     next()
                 }
-
                 res.json(random.rows[0])
             })
             .catch(next)
