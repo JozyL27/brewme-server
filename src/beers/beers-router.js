@@ -31,7 +31,11 @@ beersRouter
     .route('/name/:beer_name')
     .all(checkNameExists)
     .get((req, res, next) => {
-        BeerService.getByName(req.app.get('db'), req.params.beer_name)
+        let beerName = req.params.beer_name
+        beerName = beerName.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ');
+        encodeURIComponent(beerName)
+
+        BeerService.getByName(req.app.get('db'), beerName)
             .then(beer => {
                 res.json(beer)
             })
@@ -61,9 +65,13 @@ beersRouter
 
 async function checkNameExists(req, res, next) {
     try {
+        let beerName = req.params.beer_name
+        beerName = beerName.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ');
+        encodeURIComponent(beerName)
+
         const beer = await BeerService.getByName(
             req.app.get('db'),
-            req.params.beer_name
+            beerName
         )
 
         if (beer.length === 0)
