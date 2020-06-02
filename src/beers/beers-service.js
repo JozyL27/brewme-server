@@ -1,6 +1,3 @@
-const xss = require('xss')
-
-
 const BeersService = {
     getAllBeers(db) {
         return db
