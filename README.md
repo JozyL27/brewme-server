@@ -1,11 +1,14 @@
 # BrewMe Server
 
+# Base URL:
+- https://protected-beach-04591.herokuapp.com/api
+
 ## Overview
 
 - Stack:
   - Client: React.js, HTML5, CSS3
-  - Web Server: Node and Express with PostgreSQL 
-  - Database: Locally hosted PostgreSQL 
+  - Web Server: Node, Express, PostgreSQL 
+  - Database: PostgreSQL 
   - Tests: Supertest, Chai
 
 ## Endpoints
